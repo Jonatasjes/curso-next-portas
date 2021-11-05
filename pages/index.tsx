@@ -1,25 +1,44 @@
+/* eslint-disable @next/next/link-passhref */
+import styles from "../styles/Formulario.module.css";
+import Cartao from "../components/Cartao";
+import Link from "next/link";
+import EntradaNumerica from "../components/EntradaNumerica";
 import { useState } from "react";
-import Porta from "../components/Porta";
-import Presente from "../components/Presente";
-import { criarPortas } from "../functions/portas";
-import PortaModel from "../models/porta";
 
-export default function Home() {
-  // const [p1, setP1] = useState(new PortaModel(1));
+export default function Formulario() {
+  const [qtdePortas, setQtdePortas] = useState(3);
+  const [comPresente, setComPresente] = useState(1);
 
-  const [portas, setPortas] = useState(criarPortas(3, 2));
-
-  function renderizarPortas() {
-    return portas.map((porta) => {
-      return (
-        <Porta
-          key={porta.numero}
-          value={porta}
-          onChange={(novaPorta) => console.log(novaPorta)}
-        />
-      );
-    });
-  }
-
-  return <div style={{ display: "flex" }}>{renderizarPortas()}</div>;
+  return (
+    <div className={styles.formulario}>
+      <div>
+        <Cartao bgcolor="#c0392c">
+          <h1>Monty Hall</h1>
+        </Cartao>
+        <Cartao>
+          <EntradaNumerica
+            text="Qtde Portas?"
+            value={qtdePortas}
+            onChange={(novaQtde) => setQtdePortas(novaQtde)}
+          />
+        </Cartao>
+      </div>
+      <div>
+        <Cartao>
+          <EntradaNumerica
+            text="Porta com Presente?"
+            value={comPresente}
+            onChange={(novaPortaComPresente) =>
+              setComPresente(novaPortaComPresente)
+            }
+          />
+        </Cartao>
+        <Cartao bgcolor="#28a085">
+          <Link href={`/jogo/${qtdePortas}/${comPresente}`} passHref>
+            <h2 className={styles.link}>Iniciar</h2>
+          </Link>
+        </Cartao>
+      </div>
+    </div>
+  );
 }

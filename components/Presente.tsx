@@ -1,6 +1,6 @@
-import styles from "../styles/Presente.module.css"
+import styles from "../styles/Presente.module.css";
 
-export default function Presente () {
+export default function Presente() {
   return (
     <div className={styles.presente}>
       <div className={styles.tampa}></div>
@@ -8,5 +8,5 @@ export default function Presente () {
       <div className={styles.laco1}></div>
       <div className={styles.laco2}></div>
     </div>
-  )
+  );
 }
